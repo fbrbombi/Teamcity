@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System;
 
 namespace TestTeamCity
 {
@@ -20,6 +21,7 @@ namespace TestTeamCity
         {
             driver.Url = "https://www.google.co";
             System.Console.WriteLine("AJIACO");
+            System.Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
         }
 
         [TearDown]
