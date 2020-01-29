@@ -19,12 +19,14 @@ namespace TestTeamCity
         public void test()
         {
             driver.Url = "https://www.google.co";
+            System.Console.WriteLine("AJIACO");
         }
 
         [TearDown]
         public void closeBrowser()
         {
-            driver.Close();
+            driver.Quit();
+            
         }
     }
 }
