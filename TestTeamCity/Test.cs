@@ -47,6 +47,16 @@ namespace TestTeamCity
 
         }
 
+        [Test]
+        public void test4()
+        {
+            driver.Url = "https://www.google.co";
+            Console.WriteLine("AJIACO4");
+            Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
+            Thread.Sleep(60000);
+
+        }
+
         [TearDown]
         public void closeBrowser()
         {
