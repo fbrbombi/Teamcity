@@ -1,7 +1,10 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.IO;
+using System.Reflection;
 using System.Threading;
 
 namespace TestTeamCity
@@ -35,6 +38,7 @@ namespace TestTeamCity
             Console.WriteLine("AJIACO2");
             Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
             Thread.Sleep(60000);
+            Assert.IsTrue(false);
 
         }
         [Test]
@@ -43,6 +47,7 @@ namespace TestTeamCity
             Console.WriteLine("AJIACO3");
             Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
             Thread.Sleep(60000);
+            Assert.IsTrue(false);
 
         }
 
@@ -58,6 +63,11 @@ namespace TestTeamCity
         [TearDown]
         public void closeBrowser()
         {
+            if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
+            {
+                var screenshots = ((ITakesScreenshot)driver.Value).GetScreenshot();
+                screenshots.SaveAsFile(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/" + TestContext.CurrentContext.Test.FullName + ".png");
+            }
             Console.WriteLine(driver.ToString());
             driver.Value.Quit();
             
