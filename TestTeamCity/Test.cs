@@ -9,20 +9,21 @@ namespace TestTeamCity
     [TestFixture]
     class Test
     {
-        IWebDriver driver;
+        ThreadLocal<IWebDriver> driver= new ThreadLocal<IWebDriver>();
 
 
         [SetUp]
         public void startBrowser()
         {
-            driver = new ChromeDriver();
+            driver.Value = new ChromeDriver();
+            driver.Value.Url = "https://www.google.co";
+
         }
 
 
         [Test]
         public void test()
         {
-            driver.Url = "https://www.google.co";
             Console.WriteLine("AJIACO1");
             Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
             Thread.Sleep(60000);
@@ -31,7 +32,6 @@ namespace TestTeamCity
         [Test]
         public void test2()
         {
-            driver.Url = "https://www.google.co";
             Console.WriteLine("AJIACO2");
             Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
             Thread.Sleep(60000);
@@ -40,7 +40,6 @@ namespace TestTeamCity
         [Test]
         public void test3()
         {
-            driver.Url = "https://www.google.co";
             Console.WriteLine("AJIACO3");
             Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
             Thread.Sleep(60000);
@@ -50,7 +49,6 @@ namespace TestTeamCity
         [Test]
         public void test4()
         {
-            driver.Url = "https://www.google.co";
             Console.WriteLine("AJIACO4");
             Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
             Thread.Sleep(60000);
@@ -60,7 +58,8 @@ namespace TestTeamCity
         [TearDown]
         public void closeBrowser()
         {
-            driver.Quit();
+            Console.WriteLine(driver.ToString());
+            driver.Value.Quit();
             
         }
     }
