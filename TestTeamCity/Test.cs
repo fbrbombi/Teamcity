@@ -29,7 +29,7 @@ namespace TestTeamCity
         {
             Console.WriteLine("AJIACO1");
             Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
-            Thread.Sleep(60000);
+            Thread.Sleep(15000);
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace TestTeamCity
         {
             Console.WriteLine("AJIACO2");
             Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
-            Thread.Sleep(60000);
+            Thread.Sleep(15000);
             Assert.IsTrue(false);
 
         }
@@ -46,7 +46,7 @@ namespace TestTeamCity
         {
             Console.WriteLine("AJIACO3");
             Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
-            Thread.Sleep(60000);
+            Thread.Sleep(15000);
             Assert.IsTrue(false);
 
         }
@@ -56,7 +56,7 @@ namespace TestTeamCity
         {
             Console.WriteLine("AJIACO4");
             Console.WriteLine(Environment.GetEnvironmentVariable("Ambiente"));
-            Thread.Sleep(60000);
+            Thread.Sleep(15000);
 
         }
 
@@ -65,8 +65,9 @@ namespace TestTeamCity
         {
             if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
             {
+                Directory.CreateDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)+"/screenshots");
                 var screenshots = ((ITakesScreenshot)driver.Value).GetScreenshot();
-                screenshots.SaveAsFile(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/" + TestContext.CurrentContext.Test.FullName + ".png");
+                screenshots.SaveAsFile(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/screenshots/" + TestContext.CurrentContext.Test.FullName + ".png");
             }
             Console.WriteLine(driver.ToString());
             driver.Value.Quit();
